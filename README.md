@@ -1,5 +1,6 @@
 # seghegfa
-Seghegfa search engine
+<h1>Seghegfa search engine</h1>
+
 The Seghegfa application is a python program using the flask library that is used to search for a specified word in uploaded text documents. 
 Each document is uploaded on the server side and split into tokens. 
 The processed data is stored in the session. 
