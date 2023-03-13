@@ -9,7 +9,7 @@ app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 25 * 1024 * 1024
 app.config['UPLOAD_EXTENSIONS'] = ['.txt']
 app.config['UPLOAD_PATH'] = 'uploads'
-app.secret_key = 'super secret key'
+app.secret_key = '6318262as1328X1172630541das24674320c2'
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
