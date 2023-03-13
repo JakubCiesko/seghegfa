@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seghegfa</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        li:hover{
+            
+            transform:scale(1.02);
+        }
+        li{
+            word-break: break-word;
+            box-shadow: 8px 8px 8px #666666;
+        }
+        .modal{
+            word-break: break-word;
+        }
+    </style>
+</head>
+<body>
+    <div class="d-flex align-items-center justify-content-center text-center" style="min-height: 80vh;">
+        <div class="container">
+            <div class="row">
+                <div class="col col-lg-12">
+                    <!--file:///D:\Nový priečinok\DALL_E_2023-03-02_18.49.25_-_Create_my_search_engine_logo_with_a_koala_holding_magnifying_glass_in_teal_colour-removebg-preview.png-->
+                    <a href="/"><img src="static/dalle_logo.png" class="img-fluid" alt="Seghegfa logo"></a>
+                </div>
+            </div>
+            <!--<div class="row">
+                <div class="col col-lg-12">
+                    <h1></h1>
+                </div>
+            </div>-->
+            <div class="row">
+                <div class="col col-lg-12">
+                    <h1>Výsledky hľadania pre slovo: {{q_word|title}}</h1>
+                </div>
+            </div>
+            <div class="container text-center justify-content-center">
+
+                        <ul class="list-group">
+                            
+                            {%for name, sentences in snippets|items%}
+                                {%for sentence in sentences%}
+                                    {% if sentence%}
+                                   
+                                    <a data-toggle="modal" data-target="#{{name[3:5]}}modal{{loop.index0}}{{name[1:3]|reverse}}"><li class="list-group-item" style="margin: 0.5vh;"><h3>{{name}}:</h3> {{sentence[0]}} <mark>{{q_word}}</mark> {{sentence[1]}}</li></a>
+                                        <div class="modal fade" id="{{name[3:5]}}modal{{loop.index0}}{{name[1:3]|reverse}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h5 class="modal-title" id="exampleModalLongTitle">{{name}}</h5>
+                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                  </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                  {{text[name][loop.index0][0]}} <mark>{{sentence[0]}} {{q_word}} {{sentence[1]}}</mark> {{text[name][loop.index0][1]}}
+                                                </div>
+
+                                              </div>
+                                            </div>
+                                        </div>
+                                        
+                                    {% endif %}
+                                {%endfor%}
+                            {%endfor%}
+                        </ul>
+                        
+                        
+                    
+                        
+                    
+                
+            </div>
+        </div>
+</div>
+<br>
+<footer>
+    <div class="container  text-center">
+        <h6>Vytvoril: Jakub Čieško</h6>
+    </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+crossorigin="anonymous"></script>
+    
+</body>
+</html>
