@@ -37,13 +37,13 @@
             <div class="container text-center justify-content-center">
 
                         <ul class="list-group">
-                            
+                            {% set modal_index = namespace(index=0) %}
                             {%for name, sentences in snippets|items%}
                                 {%for sentence in sentences%}
-                                    {% if sentence%}
-                                   
-                                    <a data-toggle="modal" data-target="#{{name[3:5]}}modal{{loop.index0}}{{name[1:3]|reverse}}"><li class="list-group-item" style="margin: 0.5vh;"><h3>{{name}}:</h3> {{sentence[0]}} <mark>{{q_word}}</mark> {{sentence[1]}}</li></a>
-                                        <div class="modal fade" id="{{name[3:5]}}modal{{loop.index0}}{{name[1:3]|reverse}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                   {% if sentence%}
+                                   {% set modal_index.index = modal_index.index + 1 %}
+                                    <a data-toggle="modal" data-target="#modal{{modal_index.index}}"><li class="list-group-item" style="margin: 0.5vh;"><h3>{{name}}:</h3> {{sentence[0]}} <mark>{{q_word}}</mark> {{sentence[1]}}</li></a>
+                                        <div class="modal fade" id="modal{{modal_index.index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                               <div class="modal-content">
                                                 <div class="modal-header">
