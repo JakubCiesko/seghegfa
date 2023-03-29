@@ -91,7 +91,7 @@ def search_texts(q_word: str, processed_data:dict, window_size:int, multiply_con
     :return: tuple of: 0. snippets containing q_word occurances 1. bigger text chunks containing q_word
     """
     snippets = dict()
-    texts = dict()
+    
     for k, v in processed_data.items():
         q_word = q_word.lower()
         if q_word in v:
@@ -100,26 +100,27 @@ def search_texts(q_word: str, processed_data:dict, window_size:int, multiply_con
                 window_size = int(window_size) if window_size else 3
                 prevalue = " ".join(v[index - window_size:index])
                 postvalue = " ".join(v[index + 1: index + window_size + 1])
-                text_value = " ".join(v[index - multiply_const * window_size:index - window_size]), " ".join(
-                    v[index + window_size:index + multiply_const * window_size])
                 value = (prevalue, postvalue)
                 if k in snippets:
                     snippets[k].append(value)
-                    texts[k].append(text_value)
+                    
                 else:
                     snippets[k] = [value]
-                    texts[k] = [text_value]
+                    
 
-    return snippets, texts
+    return snippets
 
 
 @app.route("/search", methods=["POST", "GET"])
 def search():
+    """
+    Searches all occurences of query word in texts saved in session and renders html template.
+    """
     processed_data = session.get("processed_data", None)
     q_word = request.args.get("q_word")
     window_size = request.args.get("window_size")
-    snippets, texts = search_texts(q_word, processed_data, window_size)
-    return render_template("search_results.html", snippets=snippets, q_word=q_word, text=texts)
+    snippets = search_texts(q_word, processed_data, window_size)
+    return render_template("search_results.html", snippets=snippets, q_word=q_word)
 
 
 if __name__ == "__main__":
